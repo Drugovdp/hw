@@ -45,3 +45,15 @@
 .button:active {
 
 }
+
+@media screen and (max-width: 600px) {
+    .sendForm {
+        gap: 20px;
+    }
+    .textarea {
+        flex-basis: 70%;
+    }
+    .button {
+        flex-basis: 25%;
+    }
+}

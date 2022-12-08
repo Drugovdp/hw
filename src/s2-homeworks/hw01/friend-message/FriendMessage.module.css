@@ -64,3 +64,15 @@
     line-height: 19px;
     padding: 10px;
 }
+
+@media screen and (max-width: 600px) {
+    .friendImageAndText {
+        gap: 10px;
+    }
+    .friendImageAndText img {
+        width: 40px;
+    }
+    .friendText {
+        min-width: 250px;
+    }
+}

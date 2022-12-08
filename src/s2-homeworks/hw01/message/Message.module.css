@@ -66,3 +66,16 @@
     line-height: 19px;
     padding: 10px;
 }
+
+@media screen and (max-width: 600px) {
+    .imageAndText {
+        gap: 10px;
+    }
+    .imageAndText img {
+        width: 40px;
+        order: 1;
+    }
+    .text {
+        min-width: 250px;
+    }
+}
