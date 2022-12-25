@@ -55,8 +55,6 @@ const GreetingContainer: React.FC<GreetingContainerPropsType> = ({users, addUser
         pureOnEnter(e, addUser)
     }
 
-    console.log(users)
-
     const totalUsers = users.length // need to fix
     const lastUserName = users.map(el=> el.name)[users.length - 1] // need to fix
 
