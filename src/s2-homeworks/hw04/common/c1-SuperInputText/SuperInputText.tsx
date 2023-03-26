@@ -21,55 +21,32 @@ type SuperInputTextPropsType = Omit<DefaultInputPropsType, 'type'> & {
     spanClassName?: string
 }
 
-const SuperInputText: React.FC<SuperInputTextPropsType> = (
-    {
-        onChange,
-        onChangeText,
-        onKeyPress,
-        onEnter,
-        error,
-        className,
-        spanClassName,
-        id,
+const SuperInputText: React.FC<SuperInputTextPropsType> = (props) => {
 
-        ...restProps // все остальные пропсы попадут в объект restProps
-    }
-) => {
+    const {onChange, onChangeText, onKeyDown, onEnter, error, className, spanClassName, id, ...restProps} = props
+
     const onChangeCallback = (e: ChangeEvent<HTMLInputElement>) => {
-        onChange?.(e) // если есть пропс onChange, то передать ему е (поскольку onChange не обязателен)
+        onChange?.(e)// если есть пропс onChange, то передать ему е (поскольку onChange не обязателен)
 
         onChangeText?.(e.currentTarget.value)
     }
-    const onKeyPressCallback = (e: KeyboardEvent<HTMLInputElement>) => {
-        onKeyPress?.(e)
+    const onKeyDownCallback = (e: KeyboardEvent<HTMLInputElement>) => {
+        onKeyDown?.(e)
 
         onEnter && // если есть пропс onEnter
         e.key === 'Enter' && // и если нажата кнопка Enter
         onEnter() // то вызвать его
     }
 
-    const finalSpanClassName = s.error
-        + (spanClassName ? ' ' + spanClassName : '')
-    const finalInputClassName = s.input
-        + (error ? ' ' + s.errorInput : ' ' + s.superInput)
-        + (className ? ' ' + s.className : '') // задача на смешивание классов
+    const finalSpanClassName = `${error ? s.error : ''}`
+    const finalInputClassName = `${s.input} ${error ? s.errorInput : ''}`
 
     return (
         <div className={s.inputWrapper}>
-            <input
-                id={id}
-                type={'text'}
-                onChange={onChangeCallback}
-                onKeyPress={onKeyPressCallback}
+            <input id={id} type={'text'} onChange={onChangeCallback} onKeyDown={onKeyDownCallback}
                 className={finalInputClassName}
-                {...restProps} // отдаём инпуту остальные пропсы если они есть (value например там внутри)
-            />
-            <span
-                id={id ? id + '-span' : undefined}
-                className={finalSpanClassName}
-            >
-                {error}
-            </span>
+                {...restProps}/>
+            <span id={id ? id + '-span' : undefined} className={finalSpanClassName}>{error}</span>
         </div>
     )
 }

@@ -11,10 +11,12 @@
 }
 
 .buttons {
+    flex-basis: 180px;
     display: flex;
     flex-direction: column;
     gap: 24px;
 }
+
 
 .checkboxes {
     display: flex;

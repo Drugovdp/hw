@@ -9,27 +9,13 @@ type SuperButtonPropsType = DefaultButtonPropsType & {
     xType?: string
 }
 
-const SuperButton: React.FC<SuperButtonPropsType> = (
-    {
-        xType,
-        className,
-        disabled,
-        ...restProps // все остальные пропсы попадут в объект restProps, там же будет children
-    }
-) => {
-    const finalClassName = s.button
-        // + (disabled
-        //         ? ...
-        //         : xType === 'red'
-        //             ? ...
-        + (className ? ' ' + className : '') // задачка на смешивание классов
+const SuperButton: React.FC<SuperButtonPropsType> = (props) => {
+    const {xType, className, disabled, ...restProps} = props
+
+    const finalClassName = `${s.button} ${!xType ? s.default : xType === 'red' ? s.red : xType === 'noted' ? s.disabled : xType === 'secondary' ? s.secondary : ''}`
 
     return (
-        <button
-            disabled={disabled}
-            className={finalClassName}
-            {...restProps} // отдаём кнопке остальные пропсы если они есть (children там внутри)
-        />
+        <button disabled={disabled} className={finalClassName} {...restProps} />
     )
 }
 
