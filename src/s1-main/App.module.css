@@ -3,6 +3,11 @@
     margin: 0;
     padding: 0;
 }
+
+a {
+    text-decoration: none;
+}
+
 .App {
     --header_height: 60px;
 }
